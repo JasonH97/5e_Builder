@@ -480,7 +480,7 @@ int main() {
 
     string name;
     cout << "What is the name of your character?" << endl;
-    cin >> name;
+    getline(cin, name);
     my_char.set_name(name);
 
     my_char.set_class();
