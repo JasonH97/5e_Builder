@@ -3,6 +3,12 @@
 #include <string>
 #include <vector>
 
+// TODO: 
+// - class abilities
+// - skills
+// - spells/cantrips
+// - equipment
+
 using namespace std;
 
 class Character {
@@ -18,24 +24,26 @@ class Character {
         int wisdom;
         int charisma;
         vector<string> abilities;
+        vector<string> proficiencies;
         int speed;
         int darkvision;
 
     public:
-        Character(string name, string class_, string race, int hit_points, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, vector<string> abilities, int speed, int darkvision) {
-            this-> name         =         name;
-            this-> class_       =       class_;
-            this-> race         =         race;
-            this-> hit_points   =   hit_points;
-            this-> strength     =     strength;
-            this-> dexterity    =    dexterity;
-            this-> constitution = constitution;
-            this-> intelligence = intelligence;
-            this-> wisdom       =       wisdom;
-            this-> charisma     =     charisma;
-            this-> abilities    =    abilities;
-            this-> speed        =        speed;
-            this-> darkvision   =   darkvision;
+        Character(string name, string class_, string race, int hit_points, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, vector<string> abilities, int speed, int darkvision, vector<string> proficiencies) {
+            this-> name          =          name;
+            this-> class_        =        class_;
+            this-> race          =          race;
+            this-> hit_points    =    hit_points;
+            this-> strength      =      strength;
+            this-> dexterity     =     dexterity;
+            this-> constitution  =  constitution;
+            this-> intelligence  =  intelligence;
+            this-> wisdom        =        wisdom;
+            this-> charisma      =      charisma;
+            this-> abilities     =     abilities;
+            this-> speed         =         speed;
+            this-> darkvision    =    darkvision;
+            this-> proficiencies = proficiencies;
         }
 
         void set_hit_points(int hit_points) {
@@ -55,6 +63,7 @@ class Character {
         void set_speed(int speed)               { this-> speed        =         speed; }
         void set_darkvision(int darkvision)     { this-> darkvision   =    darkvision; }
         void add_ability(string ability)        { this->abilities.push_back(ability);  }
+        void add_proficiency(string prof)       { this->proficiencies.push_back(prof); }
 
         void set_class() {
             int choice;
@@ -153,8 +162,21 @@ class Character {
                 set_darkvision(60);
                 add_ability("Dwarven Resilience: You have advantage on saving throws against poison, and you have resistance against poison damage");
                 add_ability("Stonecunning: Whenever you make an Intelligence (History) check related to the Origin of Stonework, you are considered proficient in the History skill and add double your Proficiency bonus to the check, instead of your normal Proficiency bonus.");
-                //prof w/ battleaxe, handaxe, throwing hammer, warhammer
-                //prof w/ smith's tools, brewer's supplies, or mason's tools
+                add_proficiency("Battleaxes");
+                add_proficiency("Handaxes");
+                add_proficiency("Throwing Hammers");
+                add_proficiency("Warhammers");
+                int choice;
+                cout << "(Dwarf) Select proficiency in 1 of the following:" << endl;
+                cout << "1. Smith's Tools"     << endl;
+                cout << "2. Brewer's Supplies" << endl;
+                cout << "3. Mason's Tools"     << endl;
+                cin >> choice;
+                switch(choice) {
+                    case 1: add_proficiency("Smith's Tools");     break;
+                    case 2: add_proficiency("Brewer's Supplies"); break;
+                    case 3: add_proficiency("Mason's Tools");     break;
+                }
                 //languages = common, dwarvish
                 return;
             }
@@ -165,9 +187,23 @@ class Character {
                 set_darkvision(60);
                 add_ability("Dwarven Resilience: You have advantage on saving throws against poison, and you have resistance against poison damage");
                 add_ability("Stonecunning: Whenever you make an Intelligence (History) check related to the Origin of Stonework, you are considered proficient in the History skill and add double your Proficiency bonus to the check, instead of your normal Proficiency bonus.");
-                //prof w/ battleaxe, handaxe, throwing hammer, warhammer
-                //prof w/ smith's tools, brewer's supplies, or mason's tools
-                //prof w/ light/med armor
+                add_proficiency("Battleaxes");
+                add_proficiency("Handaxes");
+                add_proficiency("Throwing Hammers");
+                add_proficiency("Warhammers");
+                add_proficiency("Light Armors");
+                add_proficiency("Medium Armors");
+                int choice;
+                cout << "(Dwarf) Select proficiency in 1 of the following:" << endl;
+                cout << "1. Smith's Tools"     << endl;
+                cout << "2. Brewer's Supplies" << endl;
+                cout << "3. Mason's Tools"     << endl;
+                cin >> choice;
+                switch(choice) {
+                    case 1: add_proficiency("Smith's Tools");     break;
+                    case 2: add_proficiency("Brewer's Supplies"); break;
+                    case 3: add_proficiency("Mason's Tools");     break;
+                }
                 //languages = common, dwarvish
                 return;
             }
@@ -178,8 +214,10 @@ class Character {
                 set_darkvision(60);
                 add_ability("Fey Ancestry: You have advantage on Saving Throws against being Charmed, and magic can’t put you to sleep.");
                 add_ability("Trance: Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is “trance.”) While meditating, you can dream after a fashion; such Dreams are actually mental exercises that have become reflexive through years of practice. After Resting in this way, you gain the same benefit that a human does from 8 hours of sleep.");
-                //prof w/ Perception
-                //prof w/ longsword,shortsword,longbow
+                add_proficiency("Perception (Skill)");
+                add_proficiency("Longsword");
+                add_proficiency("Shortsword");
+                add_proficiency("Longbow");
                 //know 1 cantrip from wizard list, using INT as cast modifier
                 //know one additional language
                 //languages = common, elvish
@@ -193,8 +231,10 @@ class Character {
                 add_ability("Fey Ancestry: You have advantage on Saving Throws against being Charmed, and magic can’t put you to sleep.");
                 add_ability("Trance: Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is “trance.”) While meditating, you can dream after a fashion; such Dreams are actually mental exercises that have become reflexive through years of practice. After Resting in this way, you gain the same benefit that a human does from 8 hours of sleep.");
                 add_ability("Mask of the Wild: You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena.");
-                //prof w/ longsword,shortsword,longbow
-                //prof w/ Perception
+                add_proficiency("Perception (Skill)");
+                add_proficiency("Longsword");
+                add_proficiency("Shortsword");
+                add_proficiency("Longbow");
                 //languages = common, elvish
                 return;
             }
@@ -205,8 +245,10 @@ class Character {
                 set_darkvision(120);
                 add_ability("Fey Ancestry: You have advantage on Saving Throws against being Charmed, and magic can’t put you to sleep.");
                 add_ability("Sunlight Sensitivity: You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight.");
-                //prof w/ Perception
-                //prof w/ rapiers, shortswords, hand-crossbows
+                add_proficiency("Perception (Skill)");
+                add_proficiency("Rapiers");
+                add_proficiency("Shortswords");
+                add_proficiency("Hand-Crossbows");
                 //know `Dancing Lights` cantrip w/ CHA as cast modifier
                 //@lv3 know `Faerie Fire` w/ CHA as cast modifier
                 //@lv5 know `Darkness` w/ CHA as cast modifier
@@ -400,6 +442,7 @@ class Character {
                 add_ability("Relentless Endurance: When you are reduced to 0 Hit Points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a Long Rest.");
                 add_ability("Savage Attacks: When you score a critical hit with a melee weapon Attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.");
                 //prof w/ Intimidation
+                add_proficiency("Intimidation (Skill)");
                 //languages = common + orc
                 return;
             }
@@ -462,11 +505,15 @@ class Character {
             for (size_t i=1; i < abilities.size(); i++) {
                 cout << "  - "+abilities[i] << endl;
             }
+            cout << "Proficiencies: "                    << endl;
+            for (size_t i=1; i < proficiencies.size(); i++) {
+                cout << "  - "+proficiencies[i] << endl;
+            }
         }
 };
 
 int main() {
-    Character my_char("","","",0,0,0,0,0,0,0,{""},0,0);
+    Character my_char("","","",0,0,0,0,0,0,0,{""},0,0,{""});
 
     string name;
     cout << "What is the name of your character?" << endl;
