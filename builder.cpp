@@ -34,16 +34,16 @@ class Character {
         }
 
         // VIEWS //
-        string get_name()      { return this->name; }
-        string get_class()     { return this->class_; }
-        string get_race()      { return this->race; }
+        string get_name()              { return this->name; }
+        string get_class()             { return this->class_; }
+        string get_race()              { return this->race; }
         vector<string> get_abilities() { return this->abilities; }
-        int get_strength()     { return this->strength; }
-        int get_dexterity()    { return this->dexterity; }
-        int get_constitution() { return this->constitution; }
-        int get_intelligence() { return this->intelligence; }
-        int get_wisdom()       { return this->wisdom; }
-        int get_charisma()     { return this->charisma; }
+        int get_strength()             { return this->strength; }
+        int get_dexterity()            { return this->dexterity; }
+        int get_constitution()         { return this->constitution; }
+        int get_intelligence()         { return this->intelligence; }
+        int get_wisdom()               { return this->wisdom; }
+        int get_charisma()             { return this->charisma; }
 
         // SETS //
         void set_name(string name)              { this->name          =          name; }
