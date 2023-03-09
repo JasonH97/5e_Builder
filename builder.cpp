@@ -5,10 +5,8 @@
 
 // TODO: 
 // - class abilities
-// - skills
 // - spells/cantrips
 // - equipment
-// - language
 
 using namespace std;
 
@@ -26,11 +24,12 @@ class Character {
         int charisma;
         vector<string> abilities;
         vector<string> proficiencies;
+        vector<string> languages;
         int speed;
         int darkvision;
 
     public:
-        Character(string name, string class_, string race, int hit_points, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, vector<string> abilities, int speed, int darkvision, vector<string> proficiencies) {
+        Character(string name, string class_, string race, int hit_points, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, vector<string> abilities, int speed, int darkvision, vector<string> proficiencies, vector<string> languages) {
             this-> name          =          name;
             this-> class_        =        class_;
             this-> race          =          race;
@@ -45,6 +44,7 @@ class Character {
             this-> speed         =         speed;
             this-> darkvision    =    darkvision;
             this-> proficiencies = proficiencies;
+            this-> languages     =     languages;
         }
 
         void set_hit_points(int hit_points) {
@@ -65,6 +65,7 @@ class Character {
         void set_darkvision(int darkvision)     { this-> darkvision   =    darkvision; }
         void add_ability(string ability)        { this->abilities.push_back(ability);  }
         void add_proficiency(string prof)       { this->proficiencies.push_back(prof); }
+        void add_language(string language)      { this->languages.push_back(language); }
 
         void set_class() {
             int choice;
@@ -178,7 +179,8 @@ class Character {
                     case 2: add_proficiency("Brewer's Supplies"); break;
                     case 3: add_proficiency("Mason's Tools");     break;
                 }
-                //languages = common, dwarvish
+                add_language("Common");
+                add_language("Dwarvish");
                 return;
             }
             if (race == "Mountain Dwarf") {
@@ -205,7 +207,8 @@ class Character {
                     case 2: add_proficiency("Brewer's Supplies"); break;
                     case 3: add_proficiency("Mason's Tools");     break;
                 }
-                //languages = common, dwarvish
+                add_language("Common");
+                add_language("Dwarvish");
                 return;
             }
             if (race == "High Elf") {
@@ -220,8 +223,9 @@ class Character {
                 add_proficiency("Shortsword");
                 add_proficiency("Longbow");
                 //know 1 cantrip from wizard list, using INT as cast modifier
-                //know one additional language
-                //languages = common, elvish
+                add_language("Common");
+                add_language("Elvish");
+                add_language("1 Extra Language of Your Choice");
                 return;
             }
             if (race == "Wood Elf") {
@@ -236,7 +240,8 @@ class Character {
                 add_proficiency("Longsword");
                 add_proficiency("Shortsword");
                 add_proficiency("Longbow");
-                //languages = common, elvish
+                add_language("Common");
+                add_language("Elvish");
                 return;
             }
             if (race == "Dark Elf (Drow)") {
@@ -253,7 +258,8 @@ class Character {
                 //know `Dancing Lights` cantrip w/ CHA as cast modifier
                 //@lv3 know `Faerie Fire` w/ CHA as cast modifier
                 //@lv5 know `Darkness` w/ CHA as cast modifier
-                //languages = common, elvish
+                add_language("Common");
+                add_language("Elvish");
                 return;
             }
             if (race == "Lightfoot Halfling") {
@@ -264,7 +270,8 @@ class Character {
                 add_ability("Brave: You have advantage on Saving Throws against being Frightened.");
                 add_ability("Halfling Nimbleness: You can move through the space of any creature that is of a size larger than yours.");
                 add_ability("Naturally Stealthy: You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.");
-                //languages = common, halfling
+                add_language("Common");
+                add_language("Halfling");
                 return;
             }
             if (race == "Stout Halfling") {
@@ -275,7 +282,8 @@ class Character {
                 add_ability("Brave: You have advantage on Saving Throws against being Frightened.");
                 add_ability("Halfling Nimbleness: You can move through the space of any creature that is of a size larger than yours.");
                 add_ability("Stout Resilience: You have advantage on saving throws against poison, and you have resistance against poison damage.");
-                //languages = common, halfling
+                add_language("Common");
+                add_language("Halfling");
                 return;
             }
             if (race == "Human") {
@@ -286,7 +294,8 @@ class Character {
                 set_wisdom(wisdom+1);
                 set_charisma(charisma+1);
                 set_speed(30);
-                //langauges = common, 1 lang of choice
+                add_language("Common");
+                add_language("1 Extra Language of Your Choice");
                 return;
             }
             if (race == "Variant Human") {
@@ -332,6 +341,8 @@ class Character {
                     case 6: set_charisma(charisma+1);         break;
                     default: cout << "Invalid choice" << endl; break;
                 }
+                add_language("Common");
+                add_language("1 Extra Language of Your Choice");
                 return;
             }
             if (race == "Dragonborn") {
@@ -366,7 +377,8 @@ class Character {
                     default: cout << "Invalid choice" << endl; break;
                 }
                 add_ability(breath+" - When you use your Breath Weapon, each creature in the area of the exhalation must make a saving throw. The DC for this saving throw equals 8 + your Constitution modifier + your Proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th Level, 4d6 at 11th level, and 5d6 at 16th level.");
-                //languages = common + draconic
+                add_language("Common");
+                add_language("Draconic");
                 return;
             }
             if (race == "Forest Gnome") {
@@ -377,7 +389,8 @@ class Character {
                 add_ability("Gnome Cunning: You have advantage on all Intelligence, Wisdom, and Charisma Saving Throws against magic.");
                 add_ability("Speak with Small Beasts: Through sound and gestures, you may communicate simple ideas with Small or smaller beasts.");
                 //know minor illusion cantrip, INT cast modifier
-                //languages = common + gnomish
+                add_language("Common");
+                add_language("Gnomish");
                 return;
             }
             if (race == "Rock Gnome") {
@@ -388,7 +401,8 @@ class Character {
                 add_ability("Gnome Cunning: You have advantage on all Intelligence, Wisdom, and Charisma Saving Throws against magic.");
                 add_ability("Artificer's Lore: Whenever you make an Intelligence (History) check related to magic items, alchemical Objects, or technological devices, you can add twice your Proficiency bonus, instead of any Proficiency bonus you normally apply.");
                 add_ability("Tinker: You have Proficiency with artisan’s tools (tinker’s tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to Construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your Action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options: ; 1) Clockwork Toy: This toy is a clockwork animal, monster, or person, such as a frog, mouse, bird, Dragon, or Soldier. When placed on the ground, the toy moves 5 feet across the ground on each of your turns in a random direction. It makes Noises as appropriate to the creature it represents. ; 2) Fire Starter: The device produces a miniature flame, which you can use to light a Candle, torch, or campfire. Using the device requires your Action. ; 3) Music Box: When opened, this music box plays a single song at a moderate volume. The box stops playing when it reaches the song’s end or when it is closed.");
-                //languages = common + gnomish
+                add_language("Common");
+                add_language("Gnomish");
                 return;
             }
             if (race == "Half-Elf") {
@@ -432,8 +446,95 @@ class Character {
                     default: cout << "Invalid choice" << endl; break;
                 }
                 add_ability("Fey Ancestry: You have advantage on Saving Throws against being Charmed, and magic can’t put you to sleep.");
-                //prof in 2 skills of choice
-                //languages = common, elvish, 1 extra language
+                cout << "\n(Half-Elf) Select First Skill Proficiency:" << endl;
+                cout << "1:  Acrobatics"      << endl;
+                cout << "2:  Animal Handling" << endl;
+                cout << "3:  Arcana"          << endl;
+                cout << "4:  Athletics"       << endl;
+                cout << "5:  Deception"       << endl;
+                cout << "6:  History"         << endl;
+                cout << "7:  Insight"         << endl;
+                cout << "8:  Intimidation"    << endl;
+                cout << "9:  Investigation"   << endl;
+                cout << "10: Medicine"        << endl;
+                cout << "11: Nature"          << endl;
+                cout << "12: Perception"      << endl;
+                cout << "13: Performance"     << endl;
+                cout << "14: Persuasion"      << endl;
+                cout << "15: Religion"        << endl;
+                cout << "16: Sleight of Hand" << endl;
+                cout << "17: Stealth"         << endl;
+                cout << "18: Survival"        << endl;
+                cin >> choice1;
+                switch(choice1) {
+                    case 1: add_proficiency("Acrobatics (Skill)");      break;
+                    case 2: add_proficiency("Animal Handling (Skill)"); break;
+                    case 3: add_proficiency("Arcana (Skill)");          break;
+                    case 4: add_proficiency("Athletics (Skill)");       break;
+                    case 5: add_proficiency("Deception (Skill)");       break;
+                    case 6: add_proficiency("History (Skill)");         break;
+                    case 7: add_proficiency("Insight (Skill)");         break;
+                    case 8: add_proficiency("Intimidation (Skill)");    break;
+                    case 9: add_proficiency("Investigation (Skill)");   break;
+                    case 10:add_proficiency("Medicine (Skill)");        break;
+                    case 11:add_proficiency("Nature (Skill)");          break;
+                    case 12:add_proficiency("Perception (Skill)");      break;
+                    case 13:add_proficiency("Performance (Skill)");     break;
+                    case 14:add_proficiency("Persuasion (Skill)");      break;
+                    case 15:add_proficiency("Religion (Skill)");        break;
+                    case 16:add_proficiency("Sleight of Hand (Skill)"); break;
+                    case 17:add_proficiency("Stealth (Skill)");         break;
+                    case 18:add_proficiency("Survival (Skill)");        break;
+                    default: cout << "Invalid choice" << endl; break;
+                }
+                cout << "(Half-Elf) Select Second Skill Proficiency:" << endl;
+                cout << "1:  Acrobatics"      << endl;
+                cout << "2:  Animal Handling" << endl;
+                cout << "3:  Arcana"          << endl;
+                cout << "4:  Athletics"       << endl;
+                cout << "5:  Deception"       << endl;
+                cout << "6:  History"         << endl;
+                cout << "7:  Insight"         << endl;
+                cout << "8:  Intimidation"    << endl;
+                cout << "9:  Investigation"   << endl;
+                cout << "10: Medicine"        << endl;
+                cout << "11: Nature"          << endl;
+                cout << "12: Perception"      << endl;
+                cout << "13: Performance"     << endl;
+                cout << "14: Persuasion"      << endl;
+                cout << "15: Religion"        << endl;
+                cout << "16: Sleight of Hand" << endl;
+                cout << "17: Stealth"         << endl;
+                cout << "18: Survival"        << endl;
+                choice2 = choice1;
+                while (choice1 == choice2) {
+                    cout << "(You cannot choose the same skill twice)" << endl;
+                    cin >> choice2;
+                }
+                switch(choice2) {
+                    case 1: add_proficiency("Acrobatics (Skill)");      break;
+                    case 2: add_proficiency("Animal Handling (Skill)"); break;
+                    case 3: add_proficiency("Arcana (Skill)");          break;
+                    case 4: add_proficiency("Athletics (Skill)");       break;
+                    case 5: add_proficiency("Deception (Skill)");       break;
+                    case 6: add_proficiency("History (Skill)");         break;
+                    case 7: add_proficiency("Insight (Skill)");         break;
+                    case 8: add_proficiency("Intimidation (Skill)");    break;
+                    case 9: add_proficiency("Investigation (Skill)");   break;
+                    case 10:add_proficiency("Medicine (Skill)");        break;
+                    case 11:add_proficiency("Nature (Skill)");          break;
+                    case 12:add_proficiency("Perception (Skill)");      break;
+                    case 13:add_proficiency("Performance (Skill)");     break;
+                    case 14:add_proficiency("Persuasion (Skill)");      break;
+                    case 15:add_proficiency("Religion (Skill)");        break;
+                    case 16:add_proficiency("Sleight of Hand (Skill)"); break;
+                    case 17:add_proficiency("Stealth (Skill)");         break;
+                    case 18:add_proficiency("Survival (Skill)");        break;
+                    default: cout << "Invalid choice" << endl; break;
+                }
+                add_language("Common");
+                add_language("Elvish");
+                add_language("1 Extra Language of Your Choice");
                 return;
             }
             if (race == "Half-Orc") {
@@ -443,9 +544,9 @@ class Character {
                 set_darkvision(60);
                 add_ability("Relentless Endurance: When you are reduced to 0 Hit Points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a Long Rest.");
                 add_ability("Savage Attacks: When you score a critical hit with a melee weapon Attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.");
-                //prof w/ Intimidation
                 add_proficiency("Intimidation (Skill)");
-                //languages = common + orc
+                add_language("Common");
+                add_language("Orcish");
                 return;
             }
             if (race == "Tiefling") {
@@ -457,7 +558,8 @@ class Character {
                 //know `Thaumaturgy` cantrip w/ CHA as cast modifier
                 //@lv3 know `Hellish Rebuke` 1x/day as 2nd level w/ CHA as cast modifier
                 //@lv5 know `Darkness` 1x/day w/ CHA as cast modifier
-                //languages = common + infernal
+                add_language("Common");
+                add_language("Infernal");
                 return;
             }
         }
@@ -511,11 +613,15 @@ class Character {
             for (size_t i=1; i < proficiencies.size(); i++) {
                 cout << "  - "+proficiencies[i] << endl;
             }
+            cout << "Languages: "                    << endl;
+            for (size_t i=1; i < languages.size(); i++) {
+                cout << "  - "+languages[i] << endl;
+            }
         }
 };
 
 int main() {
-    Character my_char("","","",0,0,0,0,0,0,0,{""},0,0,{""});
+    Character my_char("","","",0,0,0,0,0,0,0,{""},0,0,{""},{""});
 
     string name;
     cout << "What is the name of your character?" << endl;
