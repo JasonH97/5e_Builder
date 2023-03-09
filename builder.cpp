@@ -8,6 +8,7 @@
 // - skills
 // - spells/cantrips
 // - equipment
+// - language
 
 using namespace std;
 
@@ -138,18 +139,18 @@ class Character {
         }
 
         void set_initial_health() {
-            if (class_ == "Barbarian") this->hit_points = 7+((constitution-10)/2); return;
-            if (class_ == "Bard")      this->hit_points = 5+((constitution-10)/2); return;
-            if (class_ == "Cleric")    this->hit_points = 5+((constitution-10)/2); return;
-            if (class_ == "Druid")     this->hit_points = 5+((constitution-10)/2); return;
-            if (class_ == "Fighter")   this->hit_points = 6+((constitution-10)/2); return;
-            if (class_ == "Monk")      this->hit_points = 5+((constitution-10)/2); return;
-            if (class_ == "Paladin")   this->hit_points = 6+((constitution-10)/2); return;
-            if (class_ == "Ranger")    this->hit_points = 6+((constitution-10)/2); return;
-            if (class_ == "Rogue")     this->hit_points = 5+((constitution-10)/2); return;
-            if (class_ == "Sorcerer")  this->hit_points = 4+((constitution-10)/2); return;
-            if (class_ == "Warlock")   this->hit_points = 5+((constitution-10)/2); return;
-            if (class_ == "Wizard")    this->hit_points = 4+((constitution-10)/2); return;
+            if (class_ == "Barbarian") { set_hit_points(7+((constitution-10)/2)); return; }
+            if (class_ == "Bard")      { set_hit_points(5+((constitution-10)/2)); return; }
+            if (class_ == "Cleric")    { set_hit_points(5+((constitution-10)/2)); return; }
+            if (class_ == "Druid")     { set_hit_points(5+((constitution-10)/2)); return; }
+            if (class_ == "Fighter")   { set_hit_points(6+((constitution-10)/2)); return; }
+            if (class_ == "Monk")      { set_hit_points(5+((constitution-10)/2)); return; }
+            if (class_ == "Paladin")   { set_hit_points(6+((constitution-10)/2)); return; }
+            if (class_ == "Ranger")    { set_hit_points(6+((constitution-10)/2)); return; }
+            if (class_ == "Rogue")     { set_hit_points(5+((constitution-10)/2)); return; }
+            if (class_ == "Sorcerer")  { set_hit_points(4+((constitution-10)/2)); return; }
+            if (class_ == "Warlock")   { set_hit_points(5+((constitution-10)/2)); return; }
+            if (class_ == "Wizard")    { set_hit_points(4+((constitution-10)/2)); return; }
         }
 
         // APPLY & MODIFY //
@@ -290,6 +291,7 @@ class Character {
             }
             if (race == "Variant Human") {
                 // TODO: FREE FEAT
+                set_speed(30);
                 int choice1;
                 int choice2;
                 cout << "\n(Variant Human) Select First Ability to increase:" << endl;
@@ -391,6 +393,8 @@ class Character {
             }
             if (race == "Half-Elf") {
                 set_charisma(charisma+2);
+                set_speed(30);
+                set_darkvision(60);
                 int choice1;
                 int choice2;
                 cout << "\n(Half-Elf) Select First Ability to increase:" << endl;
@@ -427,8 +431,6 @@ class Character {
                     case 5: set_wisdom(wisdom+1);             break;
                     default: cout << "Invalid choice" << endl; break;
                 }
-                set_speed(30);
-                set_darkvision(60);
                 add_ability("Fey Ancestry: You have advantage on Saving Throws against being Charmed, and magic can’t put you to sleep.");
                 //prof in 2 skills of choice
                 //languages = common, elvish, 1 extra language
